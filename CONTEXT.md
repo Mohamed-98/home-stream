@@ -33,30 +33,36 @@ not by login.
 ## Key Decisions
 
 ### No app-level auth
+
 - Single-user personal app. No JWT, no login screen.
 - Security boundary is Tailscale's network-level access, not the API.
 - Backend is never port-forwarded to the public internet.
 
 ### MP3 only
+
 - Local library is MP3-only by design — simplifies tag parsing and needs no
   transcoding step for mobile playback.
 
 ### Spotify integration is metadata-only
+
 - OAuth2 pulls playlist names and track lists (`GET /me/playlists`,
   `GET /playlists/{id}/tracks`) — nothing from Spotify's playback or ad-serving
   endpoints is ever called.
 
 ### Track matching
+
 - Spotify tracks are fuzzy-matched (title + artist) against the local `tracks` table.
 - Matches store a `matchConfidence` score. Unmatched tracks are skipped during
   playback — no error state needed since the UI has no list view to show "missing" in.
 
 ### Minimal UI
+
 - One screen. Current track + Previous / Play-Pause / Next. No playlist browser,
   no seek bar in v1.
 - The backend owns queue order and position; the phone just steps through it.
 
 ### Offline caching is core, not optional
+
 - The app is built specifically for trips — the PC won't be reachable while traveling.
 - "Download playlist for offline" pulls all tracks in the active playlist to local
   device storage while still on Tailscale/home Wi-Fi.
@@ -64,6 +70,7 @@ not by login.
   only if reachable.
 
 ### Soft state, not soft deletes
+
 - This is a personal library sync tool, not a multi-tenant system — no soft-delete
   pattern needed. A rescan simply reconciles the `tracks` table against the folder.
 
@@ -175,7 +182,7 @@ homestream-backend/
 - ⬜ `GET /auth/spotify/callback` — exchange code for tokens, store in `spotify_tokens`
 - ⬜ Token refresh handling (silent refresh before expiry)
 - ⬜ `POST /playlists/import` — pull playlists + tracks from Spotify Web API,
-  upsert into `playlists` / `playlist_tracks`
+- ⬜ upsert into `playlists` / `playlist_tracks`
 - ⬜ `GET /playlists` — list imported playlists
 
 ---
