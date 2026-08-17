@@ -133,7 +133,7 @@ homestream-backend/
 ## Current Status
 
 - ✅ Phase 1 — Project setup
-- ⬜ Phase 2 — Database schema
+- ✅ Phase 2 — Database schema
 - ⬜ Phase 3 — Library module (MP3 scan + tagging)
 - ⬜ Phase 4 — Spotify auth + playlist import
 - ⬜ Phase 5 — Matcher module
@@ -159,11 +159,11 @@ homestream-backend/
 
 ## Phase 2 — Database Schema
 
-- ⬜ Design and write full Prisma schema:
-  - ⬜ `tracks` (title, artist, album, filePath, durationMs, spotifyTrackId, matchConfidence)
-  - ⬜ `playlists` (spotifyId, name)
-  - ⬜ `playlist_tracks` (playlistId, trackId, position)
-  - ⬜ `spotify_tokens` (access/refresh token, expiry)
+- ✅ Design and write full Prisma schema:
+  - ✅ `tracks` (title, artist, album, filePath, durationMs, spotifyTrackId, matchConfidence)
+  - ✅ `playlists` (spotifyId, name)
+  - ✅ `playlist_tracks` (playlistId, trackId, position)
+  - ✅ `spotify_tokens` (access/refresh token, expiry)
 
 ---
 

@@ -1,5 +1,5 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
+// HomeStream database schema
+// PostgreSQL · single-user · soft state (no soft deletes)
 
 generator client {
   provider = "prisma-client-js"
@@ -7,4 +7,63 @@ generator client {
 
 datasource db {
   provider = "postgresql"
+}
+
+/// Local MP3 library entry. One row per scanned file.
+model Track {
+  id             Int      @id @default(autoincrement())
+  title          String
+  artist         String
+  album          String?
+  filePath       String   @unique @map("file_path")
+  durationMs     Int      @map("duration_ms")
+  spotifyTrackId String?  @unique @map("spotify_track_id")
+  matchConfidence Float?  @map("match_confidence")
+  createdAt      DateTime @default(now()) @map("created_at")
+  updatedAt      DateTime @updatedAt @map("updated_at")
+
+  playlistTracks PlaylistTrack[]
+
+  @@map("tracks")
+}
+
+/// A Spotify playlist mirrored into the local DB.
+model Playlist {
+  id        Int      @id @default(autoincrement())
+  spotifyId String   @unique @map("spotify_id")
+  name      String
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  tracks PlaylistTrack[]
+
+  @@map("playlists")
+}
+
+/// Ordered membership of a local track in a playlist.
+model PlaylistTrack {
+  playlistId Int
+  trackId    Int
+  position   Int
+
+  playlist Playlist @relation(fields: [playlistId], references: [id], onDelete: Cascade)
+  track    Track    @relation(fields: [trackId], references: [id], onDelete: Cascade)
+
+  @@id([playlistId, trackId])
+  @@unique([playlistId, position])
+  @@index([trackId])
+
+  @@map("playlist_tracks")
+}
+
+/// OAuth2 credentials for the single Spotify user.
+model SpotifyToken {
+  id           Int      @id @default(autoincrement())
+  accessToken  String   @map("access_token")
+  refreshToken String   @map("refresh_token")
+  expiresAt    DateTime @map("expires_at")
+  createdAt    DateTime @default(now()) @map("created_at")
+  updatedAt    DateTime @updatedAt @map("updated_at")
+
+  @@map("spotify_tokens")
 }
