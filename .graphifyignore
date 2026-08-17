@@ -1,0 +1,15 @@
+# Tooling skill docs installed by third-party CLIs (prisma init) - not part of HomeStream
+.agents/
+.claude/
+.windsurf/
+skills-lock.json
+
+# Build artifacts & local config
+node_modules/
+dist/
+coverage/
+.env
+.env.*
+
+# Knowledge graph outputs (rerun /graphify to rebuild from sources)
+graphify-out/

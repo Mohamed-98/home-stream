@@ -1,0 +1,21 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: homestream-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: homestream
+      POSTGRES_PASSWORD: homestream
+      POSTGRES_DB: homestream_db
+    ports:
+      - '5433:5432'
+    volumes:
+      - homestream-pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U homestream -d homestream_db']
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  homestream-pgdata:

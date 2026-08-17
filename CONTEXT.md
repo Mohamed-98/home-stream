@@ -125,7 +125,7 @@ homestream-backend/
 
 ## Current Status
 
-- ⬜ Phase 1 — Project setup
+- ✅ Phase 1 — Project setup
 - ⬜ Phase 2 — Database schema
 - ⬜ Phase 3 — Library module (MP3 scan + tagging)
 - ⬜ Phase 4 — Spotify auth + playlist import
@@ -139,14 +139,14 @@ homestream-backend/
 
 ## Phase 1 — Project Setup
 
-- ⬜ Initialize NestJS project with TypeScript strict mode
-- ⬜ Set up folder structure (`src/`, `common/`, `config/`, `prisma/`)
-- ⬜ Install and configure Prisma with PostgreSQL
-- ⬜ Set up Docker Compose (postgres, app)
-- ⬜ Configure `ConfigModule` with `.env` validation (`joi` or `zod`)
-- ⬜ Set up global `ValidationPipe` (`whitelist: true`, `transform: true`)
-- ⬜ Set up global exception filter and response interceptor
-- ⬜ Write base `PrismaService` with `onModuleInit` / `onModuleDestroy`
+- ✅ Initialize NestJS project with TypeScript strict mode
+- ✅ Set up folder structure (`src/`, `common/`, `config/`, `prisma/`)
+- ✅ Install and configure Prisma with PostgreSQL
+- ✅ Set up Docker Compose (postgres, app)
+- ✅ Configure `ConfigModule` with `.env` validation (`joi` or `zod`)
+- ✅ Set up global `ValidationPipe` (`whitelist: true`, `transform: true`)
+- ✅ Set up global exception filter and response interceptor
+- ✅ Write base `PrismaService` with `onModuleInit` / `onModuleDestroy`
 
 ---
 
